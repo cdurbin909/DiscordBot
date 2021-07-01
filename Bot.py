@@ -7,12 +7,12 @@ import os
 
 client = discord.Client()
 
-commands = '"$sponge + message"' \
-           '    returns message in sponge case' \
-           '$lenny' \
-           '    returns a random lenny face' \
-           '$meme' \
-           '    returns a random meme'
+commands = '`$sponge + message:' \
+           '  returns message in sponge case\n' \
+           '$lenny:' \
+           '  returns a random lenny face\n' \
+           '$meme:' \
+           '  returns a random meme`'
 
 
 def sponge_word(word):
