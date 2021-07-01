@@ -4,6 +4,7 @@ from discord.ext import commands
 from pyrandmeme import *
 import os
 
+
 client = discord.Client()
 
 
