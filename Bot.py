@@ -6,6 +6,8 @@ import os
 
 client = discord.Client()
 
+# I added this comment for a test
+
 
 def sponge_word(word):
     yep = ''
