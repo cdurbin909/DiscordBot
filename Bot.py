@@ -7,6 +7,13 @@ import os
 
 client = discord.Client()
 
+commands = '"$sponge + message"' \
+           '    returns message in sponge case' \
+           '$lenny' \
+           '    returns a random lenny face' \
+           '$meme' \
+           '    returns a random meme'
+
 
 def sponge_word(word):
     yep = ''
@@ -42,6 +49,9 @@ async def on_message(message):
 
     if msg.startswith('$meme'):
         await message.channel.send(embed=await pyrandmeme())
+
+    if msg.startswith('$help'):
+        await message.channel.send(commands)
 
 
 client.run(os.environ.get('discord bot key'))
