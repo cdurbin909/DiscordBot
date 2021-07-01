@@ -75,8 +75,16 @@ async def on_message(message):
         dad = msg.split("i'm ", 1)[1]
         await message.channel.send('Hi ' + dad + ', I\'m dad!')
 
+    if msg.startswith("i’m") and dad_mode and responses:
+        dad = msg.split("i’m ", 1)[1]
+        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+
     if msg.startswith("I'm") and dad_mode and responses:
         dad = msg.split("I'm ", 1)[1]
+        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+
+    if msg.startswith("I’m") and dad_mode and responses:
+        dad = msg.split("I’m ", 1)[1]
         await message.channel.send('Hi ' + dad + ', I\'m dad!')
 
     if msg.startswith('$responses off'):
