@@ -97,6 +97,6 @@ async def on_message(message):
         await message.channel.send(commands)
 
 
-client.run(os.environ.get('discord bot key'))
+client.run(os.environ.get('BOT_KEY'))
 
 
