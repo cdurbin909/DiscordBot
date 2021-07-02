@@ -101,7 +101,10 @@ async def on_message(message):
 
     if msg.startswith('$8ball') and responses:
         question = msg.split('$8ball ', 1)[1]
-        await message.channel.send(random.choice(eightball))
+        if question == '' or question == ' ':
+            await message.channel.send('please type a question')
+        else:
+            await message.channel.send(random.choice(eightball))
 
     if msg.startswith('$help'):
         await message.channel.send(commands)
