@@ -1,10 +1,13 @@
+import textwrap
+
 import discord
 import random
 import lenny
 from discord.ext import commands
 from pyrandmeme import *
 import os
-
+import json
+import requests
 
 client = discord.Client()
 
@@ -122,10 +125,17 @@ async def on_message(message):
             end = 'I BOW BEFORE YOU ALMIGHTY EPIC ONE!'
         await message.channel.send('You are ' + str(rate) + '% epic! ' + end)
 
+    if msg.startswith('$showerthoughts'):
+        randompost = random.randint(1, 20)
+        url = requests.get('https://www.reddit.com/r/showerthoughts/hot.json',
+                           headers={'User-agent': 'Showerthoughtbot 0.1'})
+
+        thot = json.loads(url.text)
+
+        await message.channel.send(textwrap.fill((thot['data']['children'][randompost]['data']['title']),32))
+
     if msg.startswith('$help'):
         await message.channel.send(commands)
 
 
 client.run(os.environ.get('BOT_KEY'))
-
-
