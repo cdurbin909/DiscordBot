@@ -1,9 +1,6 @@
 import textwrap
-
-import discord
 import random
 import lenny
-from discord.ext import commands
 from pyrandmeme import *
 import os
 import json
@@ -113,6 +110,7 @@ async def on_message(message):
             await message.channel.send(random.choice(eightball))
 
     if msg.startswith('$epic'):
+        end = ''
         rate = random.randint(1, 101)
         if rate < 20:
             end = 'You are very UNepic!'

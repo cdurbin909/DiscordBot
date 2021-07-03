@@ -5,3 +5,4 @@ async-timeout==3.0.1
 discord~=1.7.3
 lenny~=0.1.1
 pyrandmeme~=0.0.6
+requests~=2.25.1
