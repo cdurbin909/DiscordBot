@@ -132,7 +132,7 @@ async def on_message(message):
 
         thot = json.loads(url.text)
 
-        await message.channel.send(textwrap.fill((thot['data']['children'][randompost]['data']['title']),32))
+        await message.channel.send(textwrap.fill((thot['data']['children'][randompost]['data']['title'])))
 
     if msg.startswith('$help'):
         await message.channel.send(commands)
