@@ -19,7 +19,10 @@ commands = '`$sponge + message: returns message in sponge case\n' \
            '$meme: returns a random meme\n' \
            '$dadmode + (on/off): changes the state of dadmode\n' \
            '(try saying "im hungry")\n' \
-           '$responses + (on/off): changes if the bot will respond\n`'
+           '$responses + (on/off): changes if the bot will respond\n' \
+           '$8ball + "your question": responds to your question\n' \
+           '$epic: returns your epic rate' \
+           '$showerthoughts: returns a random showerthought`'
 
 eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it',
              'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy try again',
