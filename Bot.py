@@ -106,6 +106,20 @@ async def on_message(message):
         else:
             await message.channel.send(random.choice(eightball))
 
+    if msg.startswith('$epic'):
+        rate = random.randint(1, 101)
+        if rate < 20:
+            end = 'You are very UNepic!'
+        if 40 > rate > 20:
+            end = 'That\'s not very epic!'
+        if 60 > rate > 40:
+            end = 'You\'re about half epic!'
+        if 80 > rate > 60:
+            end = 'Heyyy you\'re pretty epic!'
+        if 100 > rate > 80:
+            end = 'You\'re more than just epic, you\'re elite!'
+        await message.channel.send('You are ' + str(rate) + '% epic! ' + end)
+
     if msg.startswith('$help'):
         await message.channel.send(commands)
 
