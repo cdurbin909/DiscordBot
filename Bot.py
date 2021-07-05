@@ -20,7 +20,8 @@ commands = '`$sponge + message: returns message in sponge case\n' \
            '$responses + (on/off): changes if the bot will respond\n' \
            '$8ball + "your question": responds to your question\n' \
            '$epic: returns your epic rate\n' \
-           '$showerthoughts: returns a random showerthought\n`'
+           '$showerthoughts: returns a random showerthought\n' \
+           '$filter: toggles the filter (off by default)`'
 
 eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it',
              'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy try again',
