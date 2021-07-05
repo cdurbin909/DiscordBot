@@ -10,6 +10,7 @@ client = discord.Client()
 
 dad_mode = False
 responses = True
+filter = False
 
 commands = '`$sponge + message: returns message in sponge case\n' \
            '$lenny: returns a random lenny face\n' \
@@ -48,6 +49,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     global dad_mode
+    global filter
     global responses
     if message.author == client.user:
         return
@@ -56,51 +58,51 @@ async def on_message(message):
 
     if msg.startswith('$sponge') and responses:
         sponge = msg.split('$sponge ', 1)[1]
-        await message.channel.send(sponge_word(sponge))
+        await message.channel.send('`' + sponge_word(sponge) + '`')
 
     if msg.startswith('$lenny') and responses:
-        await message.channel.send(lenny.lenny())
+        await message.channel.send('`' + lenny.lenny() + '`')
 
     if msg.startswith('$meme') and responses:
         await message.channel.send(embed=await pyrandmeme())
 
     if msg.startswith('$dadmode on') and responses:
         dad_mode = True
-        await message.channel.send('dad mode enabled')
+        await message.channel.send('`dad mode enabled`')
 
     if msg.startswith('$dadmode off') and responses:
         dad_mode = False
-        await message.channel.send('dad mode disabled')
+        await message.channel.send('`dad mode disabled`')
 
     # if msg.startswith('im') and dad_mode and responses:
     if (' im ' in message.content or msg.startswith('im')) and dad_mode and responses:
         dad = msg.split('im ', 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     # if msg.startswith('Im') and dad_mode and responses:
     if (' Im ' in message.content or msg.startswith('Im')) and dad_mode and responses:
         dad = msg.split('Im ', 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     # if msg.startswith("i'm") and dad_mode and responses:
     if (' i\'m ' in message.content or msg.startswith("i'm")) and dad_mode and responses:
         dad = msg.split("i'm ", 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     # if msg.startswith("i’m") and dad_mode and responses:
     if (' i’m ' in message.content or msg.startswith("i’m")) and dad_mode and responses:
         dad = msg.split("i’m ", 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     # if msg.startswith("I'm") and dad_mode and responses:
     if (' I\'m ' in message.content or msg.startswith("I'm")) and dad_mode and responses:
         dad = msg.split("I'm ", 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     # if msg.startswith("I’m") and dad_mode and responses:
     if (' I’m ' in message.content or msg.startswith("I’m")) and dad_mode and responses:
         dad = msg.split("I’m ", 1)[1]
-        await message.channel.send('Hi ' + dad + ', I\'m dad!')
+        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     if msg.startswith('$responses off'):
         responses = False
@@ -111,26 +113,43 @@ async def on_message(message):
     if msg.startswith('$8ball') and responses:
         question = msg.split('$8ball ', 1)[1]
         if question == '' or question == ' ':
-            await message.channel.send('please type a question')
+            await message.channel.send('`please type a question`')
         else:
-            await message.channel.send(random.choice(eightball))
+            await message.channel.send('`' + random.choice(eightball) + '`')
+
+    if msg.startswith('$filter'):
+        if filter:
+            filter = False
+            await message.channel.send('`The filter is now off!`')
+        else:
+            filter = True
+            await message.channel.send('`The filter is now on!`')
+
+    if filter:
+        text_file = open("E:\\DiscordBot\\curses", "r")
+        lines = text_file.read().split(',')
+        for word in lines:
+            if word in message.content:
+                await message.delete()
+                await message.channel.send('`Woah there, the filter is on!`')
+        text_file.close()
 
     if msg.startswith('$epic'):
         end = ''
         rate = random.randint(1, 101)
         if rate < 20:
-            end = 'You are very UNepic!'
+            end = 'You are very UNepic!`'
         if 40 > rate > 20:
-            end = 'That\'s not very epic!'
+            end = 'That\'s not very epic!`'
         if 60 > rate > 40:
-            end = 'You\'re about half epic!'
+            end = 'You\'re about half epic!`'
         if 80 > rate > 60:
-            end = 'Heyyy you\'re pretty epic!'
+            end = 'Heyyy you\'re pretty epic!`'
         if 99 > rate > 80:
-            end = 'You\'re more than just epic, you\'re elite!'
+            end = 'You\'re more than just epic, you\'re elite!`'
         if rate == 100:
-            end = 'I BOW BEFORE YOU ALMIGHTY EPIC ONE!'
-        await message.channel.send('You are ' + str(rate) + '% epic! ' + end)
+            end = 'I BOW BEFORE YOU ALMIGHTY EPIC ONE!`'
+        await message.channel.send('`You are ' + str(rate) + '% epic! ' + end)
 
     if msg.startswith('$showerthoughts'):
         randompost = random.randint(1, 20)
@@ -139,7 +158,7 @@ async def on_message(message):
 
         thot = json.loads(url.text)
 
-        await message.channel.send(textwrap.fill((thot['data']['children'][randompost]['data']['title'])))
+        await message.channel.send(textwrap.fill(('`' + thot['data']['children'][randompost]['data']['title'] + '`')))
 
     if msg.startswith('$help'):
         await message.channel.send(commands)
