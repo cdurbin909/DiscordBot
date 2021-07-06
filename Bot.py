@@ -135,7 +135,7 @@ async def on_message(message):
         await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     if client.filter:
-        text_file = open("E:\\DiscordBot\\curses", "r")
+        text_file = open("\\DiscordBot\\curses", "r")
         lines = text_file.read().split(',')
         for word in lines:
             if word in message.content:
@@ -205,7 +205,7 @@ async def filter(ctx):
 @commands.has_permissions(manage_messages=True)
 async def add_filter(ctx, word):
     await ctx.channel.purge(limit=1)
-    text_file = open("E:\\DiscordBot\\curses", "a")
+    text_file = open("\\DiscordBot\\curses", "a")
     text_file.write(',' + word)
     text_file.close()
     await ctx.channel.send('Word added to filter list!')
