@@ -10,20 +10,20 @@ import requests
 # client = discord.Client()
 
 responses = True
-filter = False
+# filter = False
 
-commands1 = '`$sponge + message: returns message in sponge case\n\n' \
-            '$lenny: returns a random lenny face\n\n' \
-            '$meme: returns a random meme\n\n' \
-            '$dadmode + (on/off): changes the state of dadmode\n\n' \
-            '(try saying "im hungry")\n\n' \
-            '$responses + (on/off): changes if the bot will respond\n\n' \
-            '$8ball + "your question": responds to your question\n\n' \
-            '$epic: returns your epic rate\n\n' \
-            '$showerthoughts: returns a random showerthought\n\n' \
-            '$filter: toggles the filter (off by default)\n\n' \
-            '$add_filter + word: adds the word to the filter list\n\n' \
-            '$dm + user + message: sends the specified user a dm\n\n' \
+commands1 = '`$sponge + message: returns message in sponge case\n' \
+            '$lenny: returns a random lenny face\n' \
+            '$meme: returns a random meme\n' \
+            '$dadmode + (on/off): changes the state of dadmode\n' \
+            '(try saying "im hungry")\n' \
+            '$responses + (on/off): changes if the bot will respond\n' \
+            '$8ball + "your question": responds to your question\n' \
+            '$epic: returns your epic rate\n' \
+            '$showerthoughts: returns a random showerthought\n' \
+            '$filter: toggles the filter (off by default)\n' \
+            '$add_filter + word: adds the word to the filter list\n' \
+            '$dm + user + message: sends the specified user a dm\n' \
             '$clear + amount: clears a certain amount of messages`'
 
 eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it',
@@ -49,16 +49,18 @@ client = commands.Bot(command_prefix='$')
 
 client.dad = False
 client.responses = True
-client.filter = False
+
+
+client.remove_command('help')
+
+
+# client.filter = False
 
 
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.idle, activity=discord.Game('help'))
     print('Bot is ready')
-
-
-client.remove_command('help')
 
 
 @client.command()
@@ -134,14 +136,14 @@ async def on_message(message):
         dad = msg.split("I’m ", 1)[1]
         await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    if client.filter:
-        text_file = open("\\DiscordBot\\curses", "r")
-        lines = text_file.read().split(',')
-        for word in lines:
-            if word in message.content:
-                await message.delete()
-                await message.channel.send(f'{message.author.mention}`Woah there, the filter is on!`')
-        text_file.close()
+    # if client.filter:
+    #     text_file = open("\\DiscordBot\\curses", "r")
+    #     lines = text_file.read().split(',')
+    #     for word in lines:
+    #         if word in message.content:
+    #             await message.delete()
+    #             await message.channel.send(f'{message.author.mention}`Woah there, the filter is on!`')
+    #     text_file.close()
 
     await client.process_commands(message)
 
@@ -191,37 +193,44 @@ async def showerthoughts(ctx):
     await ctx.channel.send(textwrap.fill(('`' + thot['data']['children'][randompost]['data']['title'] + '`')))
 
 
-@client.command()
-async def filter(ctx):
-    if client.filter:
-        client.filter = False
-        await ctx.channel.send('`The filter is now off!`')
-    else:
-        client.filter = True
-        await ctx.channel.send('`The filter is now on!`')
+# @client.command()
+# async def filter(ctx):
+#     if client.filter:
+#         client.filter = False
+#         await ctx.channel.send('`The filter is now off!`')
+#     else:
+#         client.filter = True
+#         await ctx.channel.send('`The filter is now on!`')
 
 
-@client.command()
-@commands.has_permissions(manage_messages=True)
-async def add_filter(ctx, word):
-    await ctx.channel.purge(limit=1)
-    text_file = open("\\DiscordBot\\curses", "a")
-    text_file.write(',' + word)
-    text_file.close()
-    await ctx.channel.send('Word added to filter list!')
+# @client.command()
+# @commands.has_permissions(manage_messages=True)
+# async def add_filter(ctx, word):
+#     await ctx.channel.purge(limit=1)
+#     text_file = open("\\DiscordBot\\curses", "a")
+#     text_file.write(',' + word)
+#     text_file.close()
+#     await ctx.channel.send('Word added to filter list!')
 
 
-@client.command()
+@client.command(help='sends the specified user a dm')
 async def dm(ctx, member: discord.Member, *, message):
     channel = await member.create_dm()
     await channel.send(message)
     await ctx.channel.send('message sent!')
 
 
-@client.command(aliases=['c'])
+@client.command(aliases=['c'], help='clears a specified amount of messages\ndefault is 1')
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=1):
     await ctx.channel.purge(limit=amount + 1)
+
+
+@client.command(help='kicks a specified member.\nreason is listed in kick dm')
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member, *, reason="no reason provided"):
+    await member.send(f'You have been kicked from {ctx.message.guild.name}, because ' + reason)
+    await member.kick(reason=reason)
 
 
 client.run(os.environ.get('BOT_KEY'))
