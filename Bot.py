@@ -21,8 +21,6 @@ commands1 = '`$sponge + message: returns message in sponge case\n' \
             '$8ball + "your question": responds to your question\n' \
             '$epic: returns your epic rate\n' \
             '$showerthoughts: returns a random showerthought\n' \
-            '$filter: toggles the filter (off by default)\n' \
-            '$add_filter + word: adds the word to the filter list\n' \
             '$dm + user + message: sends the specified user a dm\n' \
             '$clear + amount: clears a certain amount of messages`'
 
