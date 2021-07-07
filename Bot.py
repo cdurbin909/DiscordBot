@@ -22,7 +22,8 @@ commands1 = '`$sponge + message: returns message in sponge case\n' \
             '$epic: returns your epic rate\n' \
             '$showerthoughts: returns a random showerthought\n' \
             '$dm + user + message: sends the specified user a dm\n' \
-            '$clear + amount: clears a certain amount of messages`'
+            '$clear + amount: clears a certain amount of messages' \
+            '$math + (math operation): evaluates the math operation`'
 
 eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it',
              'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy try again',
@@ -47,7 +48,6 @@ client = commands.Bot(command_prefix='$')
 
 client.dad = False
 client.responses = True
-
 
 client.remove_command('help')
 
@@ -134,6 +134,9 @@ async def on_message(message):
         dad = msg.split("I’m ", 1)[1]
         await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
+    if 'um' in message.content or msg.startswith('um ') and client.responses:
+        await message.channel.send('`um`')
+
     # if client.filter:
     #     text_file = open("\\DiscordBot\\curses", "r")
     #     lines = text_file.read().split(',')
@@ -189,6 +192,12 @@ async def showerthoughts(ctx):
     thot = json.loads(url.text)
 
     await ctx.channel.send(textwrap.fill(('`' + thot['data']['children'][randompost]['data']['title'] + '`')))
+
+
+@client.command()
+async def math(ctx, *, math_string):
+    answer = eval(math_string)
+    await ctx.channel.send(f'`{math_string} = ' + str(answer) + '`')
 
 
 # @client.command()
