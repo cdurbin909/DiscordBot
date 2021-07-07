@@ -89,10 +89,10 @@ async def meme(ctx):
 async def dadmode(ctx):
     if client.responses:
         if not client.dad:
-            dad = True
+            client.dad = True
             await ctx.channel.send('dadmode has been enabled')
         elif client.dad:
-            dad = False
+            client.dad = False
             await ctx.channel.send('dadmode has been disabled')
 
 
