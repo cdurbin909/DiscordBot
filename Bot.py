@@ -105,35 +105,36 @@ async def on_message(message):
 
     msg = message.content
 
-    # if msg.startswith('im') and dad_mode and responses:
-    if (' im ' in message.content or msg.startswith('im ')) and client.responses:
-        dad = msg.split('im ', 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+    if client.dad:
+        # if msg.startswith('im') and dad_mode and responses:
+        if (' im ' in message.content or msg.startswith('im ')) and client.responses:
+            dad = msg.split('im ', 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    # if msg.startswith('Im') and dad_mode and responses:
-    if (' Im ' in message.content or msg.startswith('Im')) and client.responses:
-        dad = msg.split('Im ', 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+        # if msg.startswith('Im') and dad_mode and responses:
+        if (' Im ' in message.content or msg.startswith('Im')) and client.responses:
+            dad = msg.split('Im ', 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    # if msg.startswith("i'm") and dad_mode and responses:
-    if (' i\'m ' in message.content or msg.startswith("i'm")) and client.responses:
-        dad = msg.split("i'm ", 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+        # if msg.startswith("i'm") and dad_mode and responses:
+        if (' i\'m ' in message.content or msg.startswith("i'm")) and client.responses:
+            dad = msg.split("i'm ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    # if msg.startswith("i’m") and dad_mode and responses:
-    if (' i’m ' in message.content or msg.startswith("i’m")) and client.responses:
-        dad = msg.split("i’m ", 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+        # if msg.startswith("i’m") and dad_mode and responses:
+        if (' i’m ' in message.content or msg.startswith("i’m")) and client.responses:
+            dad = msg.split("i’m ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    # if msg.startswith("I'm") and dad_mode and responses:
-    if (' I\'m ' in message.content or msg.startswith("I'm")) and client.responses:
-        dad = msg.split("I'm ", 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+        # if msg.startswith("I'm") and dad_mode and responses:
+        if (' I\'m ' in message.content or msg.startswith("I'm")) and client.responses:
+            dad = msg.split("I'm ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
-    # if msg.startswith("I’m") and dad_mode and responses:
-    if (' I’m ' in message.content or msg.startswith("I’m")) and client.responses:
-        dad = msg.split("I’m ", 1)[1]
-        await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+        # if msg.startswith("I’m") and dad_mode and responses:
+        if (' I’m ' in message.content or msg.startswith("I’m")) and client.responses:
+            dad = msg.split("I’m ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
     if 'um' in message.content or msg.startswith('um ') and client.responses:
         await message.channel.send('`um`')
