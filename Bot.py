@@ -22,8 +22,9 @@ commands1 = '`$sponge + message: returns message in sponge case\n' \
             '$epic: returns your epic rate\n' \
             '$showerthoughts: returns a random showerthought\n' \
             '$dm + user + message: sends the specified user a dm\n' \
-            '$clear + amount: clears a certain amount of messages' \
-            '$math + (math operation): evaluates the math operation`'
+            '$clear + amount: clears a certain amount of messages\n' \
+            '$math + (math operation): evaluates the math operation\n' \
+            '$clap + (message): adds emphasis to your message\n`'
 
 eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it',
              'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy try again',
@@ -105,7 +106,7 @@ async def on_message(message):
     msg = message.content
 
     # if msg.startswith('im') and dad_mode and responses:
-    if (' im ' in message.content or msg.startswith('im')) and client.responses:
+    if (' im ' in message.content or msg.startswith('im ')) and client.responses:
         dad = msg.split('im ', 1)[1]
         await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
 
@@ -136,6 +137,10 @@ async def on_message(message):
 
     if 'um' in message.content or msg.startswith('um ') and client.responses:
         await message.channel.send('`um`')
+
+    if 'imagine' in message.content and client.responses:
+        imagine = msg.split('imagine ', 1)[1]
+        await message.channel.send('`i can\'t even imagine ' + imagine + '`')
 
     # if client.filter:
     #     text_file = open("\\DiscordBot\\curses", "r")
@@ -191,7 +196,13 @@ async def showerthoughts(ctx):
 
     thot = json.loads(url.text)
 
-    await ctx.channel.send(textwrap.fill(('`' + thot['data']['children'][randompost]['data']['title'] + '`')))
+    await ctx.channel.send(('`' + thot['data']['children'][randompost]['data']['title'] + '`'))
+
+
+@client.command()
+async def clap(ctx, *, message):
+    new_message = message.replace(' ', ' `:clap:` ')
+    await ctx.channel.send('`' + new_message + '`')
 
 
 @client.command()
