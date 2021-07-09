@@ -47,7 +47,9 @@ def sponge_word(word):
 
 client = commands.Bot(command_prefix='$')
 
+client.dad_test = False
 client.dad = False
+client.responses_test = True
 client.responses = True
 
 client.remove_command('help')
@@ -88,12 +90,20 @@ async def meme(ctx):
 @client.command()
 async def dadmode(ctx):
     if client.responses:
-        if not client.dad:
-            client.dad = True
-            await ctx.channel.send('dadmode has been enabled')
-        elif client.dad:
-            client.dad = False
-            await ctx.channel.send('dadmode has been disabled')
+        if ctx.message.guild.name == 'MY discord bot':
+            if not client.dad_test:
+                client.dad_test = True
+                await ctx.channel.send('dadmode has been enabled')
+            elif client.dad_test:
+                client.dad_test = False
+                await ctx.channel.send('dadmode has been disabled')
+        else:
+            if not client.dad:
+                client.dad = True
+                await ctx.channel.send('dadmode has been enabled')
+            elif client.dad:
+                client.dad = False
+                await ctx.channel.send('dadmode has been disabled')
 
 
 @client.event
@@ -105,7 +115,38 @@ async def on_message(message):
 
     msg = message.content
 
-    if client.dad:
+    if client.dad_test and message.guild.name == 'MY discord bot':
+        # if msg.startswith('im') and dad_mode and responses:
+        if (' im ' in message.content or msg.startswith('im ')) and client.responses:
+            dad = msg.split('im ', 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+        # if msg.startswith('Im') and dad_mode and responses:
+        if (' Im ' in message.content or msg.startswith('Im')) and client.responses:
+            dad = msg.split('Im ', 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+        # if msg.startswith("i'm") and dad_mode and responses:
+        if (' i\'m ' in message.content or msg.startswith("i'm")) and client.responses:
+            dad = msg.split("i'm ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+        # if msg.startswith("i’m") and dad_mode and responses:
+        if (' i’m ' in message.content or msg.startswith("i’m")) and client.responses:
+            dad = msg.split("i’m ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+        # if msg.startswith("I'm") and dad_mode and responses:
+        if (' I\'m ' in message.content or msg.startswith("I'm")) and client.responses:
+            dad = msg.split("I'm ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+        # if msg.startswith("I’m") and dad_mode and responses:
+        if (' I’m ' in message.content or msg.startswith("I’m")) and client.responses:
+            dad = msg.split("I’m ", 1)[1]
+            await message.channel.send('`Hi ' + dad + ', I\'m dad!`')
+
+    if client.dad and message.guild.name != 'MY discord bot':
         # if msg.startswith('im') and dad_mode and responses:
         if (' im ' in message.content or msg.startswith('im ')) and client.responses:
             dad = msg.split('im ', 1)[1]
