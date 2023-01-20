@@ -6,6 +6,7 @@ from pyrandmeme import *
 import os
 import json
 import requests
+import config
 
 # client = discord.Client()
 
@@ -44,8 +45,9 @@ def sponge_word(word):
             i = not i
     return yep
 
-
-client = commands.Bot(command_prefix='$')
+intents = discord.Intents.default()
+intents.message_content = True
+client = commands.Bot(command_prefix='$', intents=intents)
 
 client.dad_test = False
 client.dad = False
@@ -293,4 +295,5 @@ async def kick(ctx, member: discord.Member, *, reason="no reason provided"):
     await member.kick(reason=reason)
 
 
-client.run(os.environ.get('BOT_KEY'))
+client.run(config.Token)
+# client.run(os.environ.get('BOT_KEY'))
