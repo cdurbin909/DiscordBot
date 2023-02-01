@@ -6,7 +6,6 @@ from pyrandmeme import *
 import os
 import json
 import requests
-import config
 
 # client = discord.Client()
 
